@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import axios from "axios";
-import styles from '../styles/home.module.css'
+import * as S from './styles'
 import { Search } from 'public/icons/search';
 import Head from 'next/head';
+import { ExpandMore } from 'public/icons/expandMore';
 
 export default function Home() {
   const [inputValue, setInputValue] = useState('')
@@ -23,54 +24,61 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <title>GitHub API</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch&display=swap" rel="stylesheet" />
-        <link rel="icon" href="gitWhite.png" />
-      </Head>
-      <div className={styles.container}>
-        <section className={styles.sectionSearch}>
-          <div className={styles.subSection}>
-            <img className={styles.img} src='./gitBlack.png' alt='githubWhite' />
-          </div>
-          <h1 className={styles.title}>GitHub Profile</h1>
-          <div className={styles.content_search}>
+      <S.Container>
+        <S.SectionSearch>
+          <S.SubSection>
+            <S.Img src='./gitBlack.png' alt='githubWhite' />
+          </S.SubSection>
+          <S.Title>GitHub Profile</S.Title>
+          <S.ContentSearch>
             <h2>Search for a user:</h2>
             <div>
               <input placeholder='User' onChange={(e: any) => setInputValue(e.target.value)} />
-              <button className={styles.button_search} onClick={() => searchUser()}>
+              <S.ButtonSearch onClick={() => searchUser()}>
                 <Search width={20} />
-              </button>
+              </S.ButtonSearch>
             </div>
-          </div>
-        </section>
-        <section className={styles.section_info}>
+          </S.ContentSearch>
+        </S.SectionSearch>
+        <S.SectionInfo>
           {userProfile &&
-            <div className={styles.section_card}>
-              <img className={styles.img_avatar} src={userProfile.avatar_url} alt='img-avatar' />
-              <ul className={styles.ul_info}>
-                <li>
-                  <h3>{userProfile.name}</h3>
-                </li>
-                <li>
-                  <p>{userProfile.login}</p>
-                </li>
-                <li>
-                  <p>Bio: {userProfile.bio}</p>
-                </li>
-                <li>
-                  <p>Followers: {userProfile.followers}</p>
-                </li>
-                <li>
-                  <p>Following: {userProfile.following}</p>
-                </li>
-              </ul>
-            </div>
+            <S.SectionCard>
+              <S.InfoUser>
+                <S.Avatar src={userProfile.avatar_url} alt='img-avatar' />
+                <S.UlInfo>
+                  <li>
+                    <h3>{userProfile.name}</h3>
+                  </li>
+                  <li>
+                    <p>{userProfile.login}</p>
+                  </li>
+                  <li>
+                    <p>Bio: {userProfile.bio}</p>
+                  </li>
+                  <S.UlSubInfo>
+                    <li>
+                      <p>Followers:</p>
+                      {userProfile.followers}
+                    </li>
+                    <li>
+                      <p>Following:</p>
+                      {userProfile.following}
+                    </li>
+                    <li>
+                      <p>Public repos:</p>
+                      {userProfile.public_repos}
+                    </li>
+                  </S.UlSubInfo>
+                </S.UlInfo>
+              </S.InfoUser>
+              <S.MoreInfo>
+                <p>More Info</p>
+                <ExpandMore />
+              </S.MoreInfo>
+            </S.SectionCard>
           }
-        </section>
-      </div>
+        </S.SectionInfo>
+      </S.Container>
     </>
 
   )
