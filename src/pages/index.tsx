@@ -1,13 +1,19 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from "axios";
 import * as S from './styles'
 import { Search } from 'public/icons/search';
 import Head from 'next/head';
 import { ExpandMore } from 'public/icons/expandMore';
+import { Button } from '@/components/Button/Button';
+import { Modal } from '@/components/Modal/Modal';
+import { Card } from '@/components/Card/Card';
 
 export default function Home() {
   const [inputValue, setInputValue] = useState('')
   const [userProfile, setUserProfile] = useState<any>()
+  const [isOpen, setIsOpen] = useState<any>(false)
+  const [urlRepos, setUrlRepos] = useState()
+  const [repos, setRepos] = useState([])
   const [error, setError] = useState(false)
 
   const searchUser = async () => {
@@ -20,65 +26,103 @@ export default function Home() {
       )
   }
 
-  console.log(userProfile, 'USER')
+  useEffect(() => {
+    setUrlRepos(userProfile?.repos_url)
+  }, [userProfile])
+
+  const infoUser = () => {
+    axios
+      .get(`${urlRepos}`)
+      .then((response: any) => {
+        setRepos(response.data)
+        setIsOpen(true)
+      })
+  }
+
+  console.log(userProfile, 'USERProfile')
 
   return (
     <>
       <S.Container>
         <S.SectionSearch>
           <S.SubSection>
+            <h1>Finder GitHub</h1>
             <S.Img src='./gitBlack.png' alt='githubWhite' />
           </S.SubSection>
-          <S.Title>GitHub Profile</S.Title>
           <S.ContentSearch>
-            <h2>Search for a user:</h2>
+            <h2>Search for a user</h2>
             <div>
-              <input placeholder='User' onChange={(e: any) => setInputValue(e.target.value)} />
+              <input placeholder='User' value={inputValue} onChange={(e: any) => setInputValue(e.target.value)} />
               <S.ButtonSearch onClick={() => searchUser()}>
                 <Search width={20} />
               </S.ButtonSearch>
             </div>
           </S.ContentSearch>
+          <S.SectionInfo>
+            {userProfile &&
+              <Card data={userProfile} click={() => infoUser()} />
+            }
+          </S.SectionInfo>
         </S.SectionSearch>
-        <S.SectionInfo>
-          {userProfile &&
-            <S.SectionCard>
-              <S.InfoUser>
-                <S.Avatar src={userProfile.avatar_url} alt='img-avatar' />
+      </S.Container>
+      {isOpen && userProfile &&
+        <Modal>
+          <S.ModalContent>
+            <S.InfoUserContent>
+              <S.ImgUser src={userProfile.avatar_url} />
+              <S.UlContent>
                 <S.UlInfo>
                   <li>
                     <h3>{userProfile.name}</h3>
                   </li>
                   <li>
-                    <p>{userProfile.login}</p>
+                    <span>{userProfile.login}</span>
                   </li>
                   <li>
-                    <p>Bio: {userProfile.bio}</p>
+                    <span><a href={userProfile.html_url}>{userProfile.html_url}</a></span>
                   </li>
-                  <S.UlSubInfo>
-                    <li>
-                      <p>Followers:</p>
-                      {userProfile.followers}
-                    </li>
-                    <li>
-                      <p>Following:</p>
-                      {userProfile.following}
-                    </li>
-                    <li>
-                      <p>Public repos:</p>
-                      {userProfile.public_repos}
-                    </li>
-                  </S.UlSubInfo>
+                  <li>
+                    <span>Email: </span>
+                    <p>{userProfile.email}</p>
+                  </li>
+                  <li>
+                    <span>Location: </span>
+                    <p>{userProfile.location}</p>
+                  </li>
+                  <li>
+                    <span>Bio: </span>
+                    <p>{userProfile.bio}</p>
+                  </li>
                 </S.UlInfo>
-              </S.InfoUser>
-              <S.MoreInfo>
-                <p>More Info</p>
-                <ExpandMore />
-              </S.MoreInfo>
-            </S.SectionCard>
-          }
-        </S.SectionInfo>
-      </S.Container>
+                <S.UlSubInfo>
+                  <li>
+                    <span>Followers</span>
+                    {userProfile.followers}
+                  </li>
+                  <li>
+                    <span>Following</span>
+                    <p>{userProfile.following}</p>
+                  </li>
+                  <li>
+                    <span>Public repos</span>
+                    <p>{userProfile.public_repos}</p>
+                  </li>
+                </S.UlSubInfo>
+              </S.UlContent>
+            </S.InfoUserContent>
+            <div>
+              {repos && repos.map((item: any, index: any) => {
+                return (
+                  <div key={index}>{item.name}</div>
+                )
+              })}
+            </div>
+            <S.ButtonReturn>
+              <Button text='Return' click={() => setIsOpen(false)} />
+            </S.ButtonReturn>
+          </S.ModalContent>
+        </Modal>
+      }
     </>
 
   )
