@@ -6,7 +6,7 @@ export const FormSearch = ({value, change, click}: any) => {
         <S.ContentSearch>
             <h2>Search for a user</h2>
             <div>
-                <input placeholder='User' value={value} onChange={change} />
+                <S.InputSearch placeholder='User' value={value} onChange={change} />
                 <S.ButtonSearch onClick={click}>
                     <Search width={20} />
                 </S.ButtonSearch>

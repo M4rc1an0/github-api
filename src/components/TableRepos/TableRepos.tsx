@@ -1,3 +1,4 @@
+import { Repo } from 'public/icons/repo'
 import * as S from './styles'
 
 export const TableRepos = ({ data }: any) => {
@@ -7,7 +8,10 @@ export const TableRepos = ({ data }: any) => {
                 return (
                     <S.RepoInfo key={index} href={item.html_url}>
                         <p>{item.name}</p>
-                        <p>{item.html_url}</p>
+                        <li>
+                            <Repo />
+                            <p>{item.html_url}</p>
+                        </li>
                     </S.RepoInfo>
                 )
             })}

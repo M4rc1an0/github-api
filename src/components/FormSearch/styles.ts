@@ -10,15 +10,16 @@ export const ContentSearch = styled.div`
         margin: 10px 0 ;
     }
 
-    input {
-        height: 40px;
-        width: 300px;
-        padding: 10px;
-        border: 1px solid #bdbdbd;
-        border-bottom-left-radius: 6px;
-        border-top-left-radius: 6px;
-        outline: none;
-    }
+`
+
+export const InputSearch = styled.input`
+    height: 40px;
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #bdbdbd;
+    border-bottom-left-radius: 6px;
+    border-top-left-radius: 6px;
+    outline: none;
 `
 
 export const ButtonSearch = styled.button`

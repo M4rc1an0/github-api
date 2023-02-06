@@ -4,6 +4,12 @@ export const InfoUserContent = styled.div`
     display: flex;
     width: 100%;
     margin-bottom: 20px;
+
+    @media (max-width: 600px) {
+        flex-direction: column;
+        align-items: center;
+
+    }
 `
 
 export const ImgUser = styled.img`
@@ -25,8 +31,6 @@ export const UlInfo = styled.ul`
     li {
         display: flex;
         list-style: none;
-        margin: 0 10px;
-        width: 100%;
         overflow-wrap: break-word;
         word-wrap: break-word; 
 
@@ -35,9 +39,29 @@ export const UlInfo = styled.ul`
             word-wrap: break-word;
         }
 
-        span, h3 {
+        span, h3, a {
             font-weight: bold;
             margin: 0 5px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        li{
+            span {
+                font-size: 15px;
+            }
+
+            p {
+                width: 100%;
+                font-size: 14px;
+            }
+
+            a {
+                white-space: nowrap;
+                width: 100%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
         }
     }
 `

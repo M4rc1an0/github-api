@@ -19,10 +19,42 @@ export const RepoInfo = styled.a`
     cursor: pointer;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 5px;
     
-
     :nth-child(1n):hover {
         background-color: #ebebeb;
+    }
+
+    li{
+        display: flex;
+        align-items: center;
+        list-style: none;
+
+        p {
+            white-space: nowrap;
+            width: 400px;
+            overflow: hidden;
+            text-overflow:    ellipsis;
+        }
+    }
+
+    @media (max-width: 768px) {
+        li{
+            p {
+                white-space: nowrap;
+                width: 250px;
+                overflow: hidden;
+                text-overflow:    ellipsis;
+            }
+        }
+    }
+
+    @media (max-width: 600px) {
+        li{
+            p {
+                display: none;
+            }
+        }
     }
 `

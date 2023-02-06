@@ -24,6 +24,10 @@ export const SectionSearch = styled.section`
     @media (max-width: 1200px) {
         width: 80%;
     }
+
+    @media (max-width: 600px) {
+        padding: 10px;
+    }
 `
 
 export const SubSection = styled.section`
@@ -87,6 +91,10 @@ export const SectionInfo = styled.section`
     justify-content: center;
     width: 100%;
     padding: 20px;
+    
+    @media (max-width: 430px) {
+        padding: 20px 5px;
+    }
 `
 
 export const ModalContent = styled.div`

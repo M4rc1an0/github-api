@@ -13,7 +13,7 @@ export const Table = ({ data }: any) => {
                         <span>{data.login}</span>
                     </li>
                     <li>
-                        <span><a href={data.html_url}>{data.html_url}</a></span>
+                        <a href={data.html_url}>{data.html_url}</a>
                     </li>
                     <li>
                         <span>Email: </span>

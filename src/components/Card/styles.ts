@@ -6,7 +6,6 @@ export const SectionCard = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 720px;
-    /* padding: 20px; */
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
 
@@ -17,6 +16,14 @@ export const SectionCard = styled.div`
     @media (max-width: 992px) {
         width: 100%;
     }
+
+    @media (max-width: 600px) {
+        width: 85%;
+    }
+
+    @media (max-width: 490px) {
+        width: 100%;
+    }
 `
 
 export const InfoUser = styled.div`
@@ -24,7 +31,8 @@ export const InfoUser = styled.div`
     display: flex;
     align-items: center;
 
-    @media (max-width: 1200px) {
+    @media (max-width: 600px) {
+        flex-direction: column;
     }
 `
 
@@ -38,12 +46,18 @@ export const Avatar = styled.img`
     }
 
     @media (max-width: 992px) {
-        width: 150px;
-        height: 150px;
+        width: 165px;
+        height: 165px;
     }
 
     @media (max-width: 768px) {
         display: none;
+    }
+
+    @media (max-width: 600px) {
+        display: initial;
+        width: 100%;
+        height: 100%;
     }
 `
 
@@ -54,6 +68,10 @@ export const AvatarMobile = styled.img`
         display: initial;
         width: 100px;
         height: 100px;
+    }
+
+    @media (max-width: 600px) {
+        display: none;
     }
 `
 
@@ -112,6 +130,15 @@ export const UlSubInfo = styled.ul`
 
         }
     }
+
+    @media (max-width: 600px) {
+        li {
+            flex-direction: column;
+            p {
+                font-size: 12px;
+            }
+        }
+    }
 `
 
 export const UlSubInfoMobile = styled.ul`
@@ -148,6 +175,22 @@ export const UlSubInfoMobile = styled.ul`
 
         }
     }
+
+    @media (max-width: 430px) {
+        li {
+            h3 {
+                font-size: 15px;
+            }
+
+            span {
+                a {
+                    font-size: 15px;
+                    word-break: break-word;
+                }
+            }
+
+        }
+    }
 `
 
 export const ContentWithMobile = styled.div`
@@ -159,5 +202,5 @@ export const MoreInfo = styled.div`
     justify-content: center;
     align-items: center;
     width: 100%;
-    padding: 5px;
+    padding: 10px;
 `
