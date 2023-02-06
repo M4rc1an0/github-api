@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 type ButtonProps = {
-    width: string
+    width: string | number | undefined
 }
 
 export const ButtonMore = styled.button<ButtonProps>`

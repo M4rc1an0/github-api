@@ -108,3 +108,8 @@ export const ButtonReturn = styled.div`
     justify-content: center;
     width: 100%;
 `
+
+export const ErroText = styled.p`
+    margin: 10px;
+    color: red;
+`

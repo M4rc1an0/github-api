@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react'
 import axios from "axios";
-import * as S from './styles'
+import * as S from '../styles/styles'
 import { Button, Card, FormSearch, LogoApplication, Modal, Table, TableRepos } from '@/components';
+import { SearchProps } from '@/types/types';
 
 export default function Home() {
   const [inputValue, setInputValue] = useState('')
-  const [userProfile, setUserProfile] = useState<any>()
-  const [isOpen, setIsOpen] = useState<any>(false)
-  const [urlRepos, setUrlRepos] = useState()
-  const [repos, setRepos] = useState([])
+  const [userProfile, setUserProfile] = useState<SearchProps>()
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [urlRepos, setUrlRepos] = useState<string | undefined>()
+  const [repos, setRepos] = useState<[] | never[]>([])
   const [error, setError] = useState(false)
 
   useEffect(() => {
@@ -18,21 +19,26 @@ export default function Home() {
   const searchUser = async () => {
     axios
       .get(`https://api.github.com/users/${inputValue}`)
-      .then((response: any) =>
+      .then((response) => {
         setUserProfile(response.data)
-      ).catch(() =>
-        alert('Deu Merda')
+        setError(false)
+      }).catch(() =>
+        setError(true)
       )
   }
+
+  console.log(userProfile, 'USERPROFILE')
 
   useEffect(() => {
     setUrlRepos(userProfile?.repos_url)
   }, [userProfile])
 
+  console.log(urlRepos, 'REPO')
+
   const infoUser = () => {
     axios
       .get(`${urlRepos}`)
-      .then((response: any) => {
+      .then((response) => {
         setRepos(response.data)
         setIsOpen(true)
       })
@@ -45,9 +51,12 @@ export default function Home() {
           <LogoApplication />
           <FormSearch
             value={inputValue}
-            change={(e: any) => setInputValue(e.target.value)}
+            change={(e: React.ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value)}
             click={() => searchUser()}
           />
+          {error &&
+            <S.ErroText>Usuário não encontrado!</S.ErroText>
+          }
           <S.SectionInfo>
             {userProfile &&
               <Card data={userProfile} click={() => infoUser()} />

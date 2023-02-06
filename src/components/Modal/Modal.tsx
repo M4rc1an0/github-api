@@ -1,7 +1,7 @@
 import * as S from './styles'
 
 type ModalProps = {
-    children: any
+    children: React.ReactElement
 } 
 
 export const Modal = ({ children }: ModalProps) => {

@@ -1,7 +1,13 @@
 import { Search } from 'public/icons/search'
 import * as S from './styles'
 
-export const FormSearch = ({value, change, click}: any) => {
+type FormSearchProps = {
+    value?: string
+    change?: (event: React.ChangeEvent<HTMLInputElement>) => void
+    click?: () => void
+}
+
+export const FormSearch = ({value, change, click}: FormSearchProps) => {
     return (
         <S.ContentSearch>
             <h2>Search for a user</h2>

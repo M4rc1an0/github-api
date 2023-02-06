@@ -1,7 +1,20 @@
 import { Button } from '../Button/Button'
 import * as S from './styles'
 
-export const Card = ({ data, click }: any) => {
+type CardProps = {
+  data: {
+    avatar_url: string | undefined
+    name: string | undefined
+    login: string | undefined
+    html_url: string | undefined
+    followers: string | undefined
+    following: string | undefined
+    public_repos: string | undefined
+  }
+  click?: () => void
+}
+
+export const Card = ({ data, click }: CardProps) => {
   return (
     <S.SectionCard>
       <S.InfoUser>

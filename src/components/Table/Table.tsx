@@ -1,6 +1,21 @@
 import * as S from './styles'
 
-export const Table = ({ data }: any) => {
+type TableProps = {
+    data: {
+        avatar_url: string | undefined
+        name: string | undefined
+        login: string | undefined
+        html_url: string | undefined
+        followers: string | undefined
+        following: string | undefined
+        public_repos: string | undefined
+        email: string | undefined
+        location: string | undefined
+        bio: string | undefined
+      }
+}
+
+export const Table = ({ data }: TableProps) => {
     return (
         <S.InfoUserContent>
             <S.ImgUser src={data.avatar_url} />
