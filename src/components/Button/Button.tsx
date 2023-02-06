@@ -1,7 +1,7 @@
 import { ButtonMore } from "./styles"
 
-export const Button = ({text, click}: any) => {
+export const Button = ({text, click, width}: any) => {
     return (
-        <ButtonMore onClick={click}>{text}</ButtonMore>
+        <ButtonMore width={width} onClick={click}>{text}</ButtonMore>
     )
 }

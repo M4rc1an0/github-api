@@ -7,19 +7,20 @@ export const Card = ({ data, click }: any) => {
       <S.InfoUser>
         <S.Avatar src={data.avatar_url} alt='img-avatar' />
         <S.UlInfo>
-          <li>
-            <h3>{data.name}</h3>
-          </li>
-          <li>
-            <p>{data.login}</p>
-          </li>
-          {/* <li>
-            <a>{data.html_url}</a>
-          </li> */}
-          <li>
-            <p>Bio:</p>
-            {data.bio}
-          </li>
+          <S.ContentWithMobile>
+            <S.UlSubInfoMobile>
+              <li>
+                <h3>{data.name}</h3>
+              </li>
+              <li>
+                <p>{data.login}</p>
+              </li>
+              <li>
+                <span><a href={data.html_url}>{data.html_url}</a></span>
+              </li>
+            </S.UlSubInfoMobile>
+            <S.AvatarMobile src={data.avatar_url} alt='img-avatar' />
+          </S.ContentWithMobile>
           <S.UlSubInfo>
             <li>
               <p>Followers</p>
@@ -39,6 +40,6 @@ export const Card = ({ data, click }: any) => {
           </S.MoreInfo>
         </S.UlInfo>
       </S.InfoUser>
-    </S.SectionCard>
+    </S.SectionCard >
   )
 }

@@ -1,10 +1,14 @@
 import styled from "styled-components";
 
-export const ButtonMore = styled.button`
+type ButtonProps = {
+    width: string
+}
+
+export const ButtonMore = styled.button<ButtonProps>`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 70%;
+    width: ${(props) => props.width ?? '200px'};
     background-color: #347d39;
     border-radius: 20px;
     padding: 5px;

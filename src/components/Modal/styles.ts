@@ -14,7 +14,7 @@ export const OpacityModal = styled.div`
 `
 
 export const Modal = styled.div`
-    width: 60%;
+    width: 70%;
     border-radius: 10px;
     padding: 20px;
     background-color: #fff;
@@ -24,6 +24,5 @@ export const Modal = styled.div`
         justify-content: center;
         border-radius: 21px;
         width: 95%;
-        height: 90%;
     }
 `
