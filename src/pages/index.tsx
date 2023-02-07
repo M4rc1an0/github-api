@@ -4,12 +4,16 @@ import * as S from '../styles/styles'
 import { Button, Card, FormSearch, LogoApplication, Modal, Table, TableRepos } from '@/components';
 import { SearchProps } from '@/types/types';
 
+interface TableProps {
+  data: { name: string; html_url: string; }[];
+}
+
 export default function Home() {
   const [inputValue, setInputValue] = useState('')
   const [userProfile, setUserProfile] = useState<SearchProps>()
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [urlRepos, setUrlRepos] = useState<string | undefined>()
-  const [repos, setRepos] = useState<[] | never[]>([])
+  const [repos, setRepos] = useState<TableProps>()
   const [error, setError] = useState(false)
 
   useEffect(() => {
@@ -27,13 +31,9 @@ export default function Home() {
       )
   }
 
-  console.log(userProfile, 'USERPROFILE')
-
   useEffect(() => {
     setUrlRepos(userProfile?.repos_url)
   }, [userProfile])
-
-  console.log(urlRepos, 'REPO')
 
   const infoUser = () => {
     axios
@@ -41,6 +41,8 @@ export default function Home() {
       .then((response) => {
         setRepos(response.data)
         setIsOpen(true)
+      }).catch(() => {
+        
       })
   }
 

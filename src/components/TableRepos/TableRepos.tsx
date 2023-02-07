@@ -1,38 +1,32 @@
 import { Repo } from 'public/icons/repo'
-import { ReactNode } from 'react'
 import * as S from './styles'
-
-type MapProps = {
-    name: string
-    html_url: string 
+interface TableProps {
+    data: { name: string; html_url: string; }[] | any;
 }
 
-interface DataProps {
-    data: [] | never[] 
-}
-
-type TableReposProps = {
-    data: {
-        map(arg0: (item: MapProps, index: string) => JSX.Element): ReactNode
-        name: string | undefined
-        html_url: string | undefined
-    }
-}
-
-export const TableRepos = ({ data }: TableReposProps) => {
+export const TableRepos = ({ data }: TableProps) => {
     return (
-        <S.ReposContent>
-            {data.map((item: MapProps, index: string) => {
-                return (
-                    <S.RepoInfo key={index} href={item.html_url}>
-                        <p>{item.name}</p>
-                        <li>
-                            <Repo />
-                            <p>{item.html_url}</p>
-                        </li>
-                    </S.RepoInfo>
-                )
-            })}
-        </S.ReposContent>
+        <>
+            {data.length ?
+                <S.ReposContent>
+                    {data.map((item: { name: string, html_url: string }, index: number) => {
+                        return (
+                            <S.RepoInfo key={index} href={item.html_url}>
+                                <p>{item.name}</p>
+                                <li>
+                                    <Repo />
+                                    <p>{item.html_url}</p>
+                                </li>
+                            </S.RepoInfo>
+                        )
+                    })
+                    }
+                </S.ReposContent>
+                :
+                <S.NotExistingRepo>
+                    <h2>No existing repositories</h2>
+                </S.NotExistingRepo>
+            }
+        </>
     )
 }

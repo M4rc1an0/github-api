@@ -15,6 +15,13 @@ export const ReposContent = styled.div`
     }
 `
 
+export const NotExistingRepo = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+`
+
 export const RepoInfo = styled.a`
     cursor: pointer;
     display: flex;
