@@ -1,6 +1,7 @@
 import { Repo } from 'public/icons/repo'
 import * as S from './styles'
-interface TableProps {
+
+type TableProps = {
     data: { name: string; html_url: string; }[] | any;
 }
 

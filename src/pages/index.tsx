@@ -3,47 +3,34 @@ import axios from "axios";
 import * as S from '../styles/styles'
 import { Button, Card, FormSearch, LogoApplication, Modal, Table, TableRepos } from '@/components';
 import { SearchProps } from '@/types/types';
+import api from '@/services/api';
 
-interface TableProps {
+type TableProps = {
   data: { name: string; html_url: string; }[];
 }
 
 export default function Home() {
-  const [inputValue, setInputValue] = useState('')
+  const [inputValue, setInputValue] = useState<string>('')
   const [userProfile, setUserProfile] = useState<SearchProps>()
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [urlRepos, setUrlRepos] = useState<string | undefined>()
   const [repos, setRepos] = useState<TableProps>()
-  const [error, setError] = useState(false)
+  const [error, setError] = useState<boolean>(false)
 
   useEffect(() => {
     document.title = 'GitHub API';
   })
 
   const searchUser = async () => {
-    axios
-      .get(`https://api.github.com/users/${inputValue}`)
-      .then((response) => {
-        setUserProfile(response.data)
-        setError(false)
-      }).catch(() =>
-        setError(true)
-      )
-  }
+    try {
+      const response = await api.get(`/${inputValue}`)
+      const repos = await api.get(`/${inputValue}/repos`)
 
-  useEffect(() => {
-    setUrlRepos(userProfile?.repos_url)
-  }, [userProfile])
-
-  const infoUser = () => {
-    axios
-      .get(`${urlRepos}`)
-      .then((response) => {
-        setRepos(response.data)
-        setIsOpen(true)
-      }).catch(() => {
-        
-      })
+      setUserProfile(response.data)
+      setRepos(repos.data)
+      setError(false)
+    } catch {
+      setError(true)
+    }
   }
 
   return (
@@ -61,7 +48,7 @@ export default function Home() {
           }
           <S.SectionInfo>
             {userProfile &&
-              <Card data={userProfile} click={() => infoUser()} />
+              <Card data={userProfile} click={() => setIsOpen(true)} />
             }
           </S.SectionInfo>
         </S.SectionSearch>
@@ -72,7 +59,7 @@ export default function Home() {
             <Table data={userProfile} />
             <TableRepos data={repos} />
             <S.ButtonReturn>
-              <Button text='Return' click={() => setIsOpen(false)} />
+              <Button name='return' text='Return' click={() => setIsOpen(false)} />
             </S.ButtonReturn>
           </S.ModalContent>
         </Modal>

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = 'https://api.github.com/'
+const baseURL = 'https://api.github.com/users/'
 
 
 const api = axios.create({
