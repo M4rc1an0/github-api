@@ -50,5 +50,6 @@ cd github-api
 1- Verificar testes - npx cypress run
 2- Abrir e rendenizar testes - npx cypress open
 
-Ao executar comandos do cypress a aplicação deve estar rodando.
 ```
+
+Ao executar comandos do cypress certifique-se que a aplicação deve esteja rodando.
