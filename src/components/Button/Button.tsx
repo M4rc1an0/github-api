@@ -4,10 +4,11 @@ type ButtonProps = {
     text: string
     click?: () => void
     width?: string | number | undefined
+    name?: string
 }
 
-export const Button = ({text, click, width}: ButtonProps) => {
+export const Button = ({text, click, width, name}: ButtonProps) => {
     return (
-        <ButtonMore width={width} onClick={click}>{text}</ButtonMore>
+        <ButtonMore name={name} width={width} onClick={click}>{text}</ButtonMore>
     )
 }

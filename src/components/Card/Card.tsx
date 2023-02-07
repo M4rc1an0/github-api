@@ -49,7 +49,7 @@ export const Card = ({ data, click }: CardProps) => {
             </li>
           </S.UlSubInfo>
           <S.MoreInfo>
-            <Button text='More Info' click={click} />
+            <Button name="more" text='More Info' click={click} />
           </S.MoreInfo>
         </S.UlInfo>
       </S.InfoUser>

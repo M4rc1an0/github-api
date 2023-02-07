@@ -12,8 +12,8 @@ export const FormSearch = ({value, change, click}: FormSearchProps) => {
         <S.ContentSearch>
             <h2>Search for a user</h2>
             <div>
-                <S.InputSearch placeholder='User' value={value} onChange={change} />
-                <S.ButtonSearch onClick={click}>
+                <S.InputSearch name='user' placeholder='User' value={value} onChange={change} />
+                <S.ButtonSearch name='search' onClick={click}>
                     <Search width={20} />
                 </S.ButtonSearch>
             </div>
