@@ -52,4 +52,4 @@ cd github-api
 
 ```
 
-Ao executar comandos do cypress certifique-se que a aplicação deve esteja rodando.
+Ao executar comandos do cypress certifique-se que a aplicação esteja rodando.
